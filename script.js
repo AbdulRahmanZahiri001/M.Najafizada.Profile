@@ -46,6 +46,8 @@ const allGrants = [
 ];
 
 const allPublications = [
+  { year: 2026, authors: "Hand, M., Najafizada, M., Wassif, A. R., & Drover, A.", title: "Prenatal Education for Pregnant Parents on Opioid Agonist Therapy in Newfoundland and Labrador: A Qualitative Study", journal: "Journal of Drug Education", doi: "https://doi.org/10.1177/00472379261495396", tags: ["equity"] },
+  { year: 2026, authors: "Boone, H., Sheppard, G., Sany, S. A., Czarnuch, S., Slaney, R., & Najafizada, M.", title: "Healthcare providers' experiences with police in Atlantic Canadian emergency departments: A qualitative study", journal: "Canadian Journal of Emergency Medicine", doi: "https://doi.org/10.1007/s43678-026-01281-5", tags: ["equity"] },
   { year: 2026, authors: "Jacques, Q., Gao, Z., Najafizada, M., et al.", title: "The Cannabis Health Literacy Questionnaire – Assessing Reliability and Known-Groups Validity in a Canadian Adult Sample", journal: "Journal of Drug Education", doi: "https://doi.org/10.1177/00472379261439959", tags: ["cannabis-policy"] },
   { year: 2026, authors: "Wassif, A. R., Najafizada, M., & Mulay, S.", title: "Influence of cultural beliefs and practices on unassisted homebirths in Afghanistan: A qualitative exploration", journal: "PLOS Global Public Health", doi: "https://doi.org/10.1371/journal.pgph.0005870", tags: ["global-health", "equity"] },
   { year: 2025, authors: "Najafizada, M.", title: "Beyond headcount: Four dimensions of Canada's primary care access crisis and a three-level agenda for action", journal: "Frontiers in Medicine", doi: "https://doi.org/10.3389/fmed.2025.1695409", tags: ["primary-care", "equity"] },
