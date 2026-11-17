@@ -199,6 +199,7 @@ aside select option,aside select optgroup{background:#1F2937;color:#D1D5DB}
 .subtabs button[aria-pressed="true"]{background:linear-gradient(135deg,var(--teal),var(--teal2));color:#fff;border-color:transparent;box-shadow:0 2px 8px rgba(42,157,143,.35)}
 .sub{display:flex;flex-direction:column;gap:20px}
 .plot{width:100%;min-width:0}
+#p-map{border-radius:8px;overflow:hidden;background:#DAEEF8}
 .empty{display:grid;place-items:center;background:var(--pale);border-radius:8px;color:var(--t2);font-size:12px;font-weight:600}
 .bars{display:flex;flex-direction:column;gap:7px}
 .brow{display:grid;grid-template-columns:minmax(0,.9fr) minmax(40px,1fr) auto;gap:10px;align-items:center;font-size:11.5px}
@@ -612,11 +613,11 @@ function setNum(el,v){const from=+(el.dataset.v||0);el.dataset.v=v;const tok=el.
   setTimeout(()=>{if(el._tok===tok)el.textContent=fmt(v)},520)}
 const kset=(k,fn)=>document.querySelectorAll(`[data-kpi="${k}"]`).forEach(fn);
 const sentTraces=(xs,get,orient)=>D.sentN.map((n,s)=>orient==="h"?{y:xs,x:get(s),name:n,type:"bar",orientation:"h",marker:{color:SC[s]},hovertemplate:`<b>%{y}</b><br>${n}: %{x:.1f}%<extra></extra>`}:{x:xs,y:get(s),name:n,type:"bar",marker:{color:SC[s]},hovertemplate:`%{x|%b %Y}<br>${n}: <b>%{y:,}</b><extra></extra>`});
-const GEO={scope:"north america",showland:true,landcolor:"#EAF5FC",showocean:true,oceancolor:"#DAEEF8",showcountries:true,countrycolor:"#90B8C6",countrywidth:1,showlakes:true,lakecolor:"#DAEEF8",showsubunits:true,subunitcolor:"#B4CDD8",subunitwidth:.6,projection:{type:"azimuthal equal area"},lataxis:{range:[41,74]},lonaxis:{range:[-142,-50]}};
+const GEO={scope:"north america",bgcolor:"#DAEEF8",showframe:false,showland:true,landcolor:"#EAF5FC",showocean:true,oceancolor:"#DAEEF8",showcountries:true,countrycolor:"#90B8C6",countrywidth:1,showlakes:true,lakecolor:"#DAEEF8",showsubunits:true,subunitcolor:"#B4CDD8",subunitwidth:.6,projection:{type:"azimuthal equal area"},lataxis:{range:[41,74]},lonaxis:{range:[-142,-50]}};
 function drawMap(id,A,h,empty){const sz=Math.max(1,...D.geos.map((g,i)=>g.lat?A.g[i]:0)),tr=(kind,color,name)=>{const ix=D.geos.map((g,i)=>g.kind===kind&&A.g[i]>0?i:-1).filter(i=>i>=0);
     return{type:"scattergeo",name,lat:ix.map(i=>D.geos[i].lat),lon:ix.map(i=>D.geos[i].lon),customdata:ix.map(i=>D.geos[i].name),text:ix.map(i=>`<b>${D.geos[i].name}</b><br>${fmt(A.g[i])} records`),mode:"markers",
       marker:{size:ix.map(i=>A.g[i]),color,opacity:.75,sizemode:"area",sizeref:2*sz/(58*58),sizemin:4,line:{width:1.5,color:"white"}},hovertemplate:"%{text}<extra></extra>"}};
-  plot(id,[tr("prov",C.teal,"Province"),tr("city",C.coral,"City")],{noaxes:true,showlegend:true,legend:{x:.01,y:.01,bgcolor:"rgba(255,255,255,.9)",bordercolor:"#E2E8F0",borderwidth:1},margin:{t:8,b:8,l:8,r:8},transition:{duration:0},dragmode:false,geo:GEO,
+  plot(id,[tr("prov",C.teal,"Province"),tr("city",C.coral,"City")],{noaxes:true,paper_bgcolor:"#DAEEF8",showlegend:true,legend:{x:.01,y:.01,bgcolor:"rgba(255,255,255,.9)",bordercolor:"#E2E8F0",borderwidth:1},margin:{t:8,b:8,l:8,r:8},transition:{duration:0},dragmode:false,geo:GEO,
     _click:e=>{const n=e.points[0].customdata;setLoc(S.loc===n?"all":n)}},h,empty)}
 
 function moveMap(w){const m=$("p-map"),h=$("maphost-"+w);if(m.parentNode!==h){h.appendChild(m);if(m._drawn)Plotly.Plots.resize(m)}}
