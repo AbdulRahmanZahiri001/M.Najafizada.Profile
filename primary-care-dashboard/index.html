@@ -591,7 +591,7 @@ function byProv(A,pick){const o={};PROVS.forEach(p=>o[p]=pick(null));D.geos.forE
 
 /* ── plotting ── */
 const AX={gridcolor:"#D0DDE6",linecolor:"#C4D3DC",zeroline:false,automargin:true};
-const CFG={displayModeBar:false,responsive:true},LEG={orientation:"h",y:1.12,x:0};
+const CFG={displayModeBar:false,responsive:true,scrollZoom:false,doubleClick:false},LEG={orientation:"h",y:1.12,x:0};
 function plot(id,data,layout,h,empty){const el=$(id);
   if(empty){if(el._drawn){Plotly.purge(el);el._drawn=false}el.className="plot empty";el.style.height=h+"px";el.textContent="No records for this filter";return}
   if(el.classList.contains("empty")){el.className="plot";el.textContent=""}
@@ -616,7 +616,7 @@ const GEO={scope:"north america",showland:true,landcolor:"#EAF5FC",showocean:tru
 function drawMap(id,A,h,empty){const sz=Math.max(1,...D.geos.map((g,i)=>g.lat?A.g[i]:0)),tr=(kind,color,name)=>{const ix=D.geos.map((g,i)=>g.kind===kind&&A.g[i]>0?i:-1).filter(i=>i>=0);
     return{type:"scattergeo",name,lat:ix.map(i=>D.geos[i].lat),lon:ix.map(i=>D.geos[i].lon),customdata:ix.map(i=>D.geos[i].name),text:ix.map(i=>`<b>${D.geos[i].name}</b><br>${fmt(A.g[i])} records`),mode:"markers",
       marker:{size:ix.map(i=>A.g[i]),color,opacity:.75,sizemode:"area",sizeref:2*sz/(58*58),sizemin:4,line:{width:1.5,color:"white"}},hovertemplate:"%{text}<extra></extra>"}};
-  plot(id,[tr("prov",C.teal,"Province"),tr("city",C.coral,"City")],{noaxes:true,showlegend:true,legend:{x:.01,y:.01,bgcolor:"rgba(255,255,255,.9)",bordercolor:"#E2E8F0",borderwidth:1},margin:{t:8,b:8,l:8,r:8},transition:{duration:0},geo:GEO,
+  plot(id,[tr("prov",C.teal,"Province"),tr("city",C.coral,"City")],{noaxes:true,showlegend:true,legend:{x:.01,y:.01,bgcolor:"rgba(255,255,255,.9)",bordercolor:"#E2E8F0",borderwidth:1},margin:{t:8,b:8,l:8,r:8},transition:{duration:0},dragmode:false,geo:GEO,
     _click:e=>{const n=e.points[0].customdata;setLoc(S.loc===n?"all":n)}},h,empty)}
 
 function moveMap(w){const m=$("p-map"),h=$("maphost-"+w);if(m.parentNode!==h){h.appendChild(m);if(m._drawn)Plotly.Plots.resize(m)}}
